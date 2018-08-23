@@ -40,7 +40,6 @@ Board.prototype.checkWinCondition = function () {
       return true;
     }
   }
-
   // Check vertical solutions
   for (var i = 0; i < 3; i++) {
     var j = 0;
@@ -53,7 +52,6 @@ Board.prototype.checkWinCondition = function () {
       return true;
     }
   }
-  
   // Check for identical diaganol
   var i = 0;
   for (i = 0; i < 3; i++) {
@@ -76,6 +74,18 @@ Board.prototype.checkWinCondition = function () {
   return false;
 }
 
+Board.prototype.checkDrawCondition = function() {
+  var j = 0;
+  for (var i = 0; i <this.currentBoard.length;i++) {
+    if (this.currentBoard[i].length === this.currentBoard.length) {
+      j ++; 
+    }
+  }
+  console.log(j);
+  if (j === 3) {
+    alert ("It's a draw!");
+  }
+}
 $(document).ready(function () {
   $(".col-md-4").click(function (event) {
     switchPlayer();
@@ -88,9 +98,11 @@ $(document).ready(function () {
         break;
     }
     var coordinatePair = getCoordinate(event.target.id);
-
+   
     newBoard.currentBoard[coordinatePair[0]][coordinatePair[1]] = $("#" + event.target.id).text();
-     
+    // console.log(newBoard.currentBoard[0].length);
+    // console.log(newBoard.currentBoard)
+    newBoard.checkDrawCondition();
     if (newBoard.checkWinCondition()) {
       alert("Win");
     }
