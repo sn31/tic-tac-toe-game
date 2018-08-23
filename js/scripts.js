@@ -83,7 +83,7 @@ Board.prototype.checkDrawCondition = function () {
     }
   }
   if (j === 3) {
-    alert("It's a draw!");
+    $("#result").append("It's a draw!")
     $(".col-md-4").empty();
     this.resetBoard();
   }
@@ -108,11 +108,9 @@ $(document).ready(function () {
     newBoard.currentBoard[coordinatePair[0]][coordinatePair[1]] = $("#" + event.target.id).text();
     newBoard.checkDrawCondition();
     if (newBoard.checkWinCondition()) {
-      alert("Player " + Object.keys(players)[currentId] + " is the winner!");
+     $("#result").append("Player " + Object.keys(players)[currentId] + " won!</br>");
       $(".col-md-4").empty();
       newBoard.resetBoard();
     }
-
   })
-
 });

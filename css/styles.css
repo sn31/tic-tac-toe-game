@@ -2,4 +2,16 @@
   height: 23vh;
   text-align: center;
   font-size: 130px;
+  border: 3px solid papayawhip;
+  background-color: rgb(119, 9, 27);
+  color: papayawhip;
 }
+.row {
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+ body {
+   text-align: center;
+ }
