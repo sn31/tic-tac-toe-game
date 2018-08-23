@@ -3,10 +3,8 @@ function Player(mark) {
 }
 
 function Board() {
-  this.initialBoard = [[], [], []]
-  this.currentBoard = [[], [], []]
+  this.currentBoard = [[], [], []];
 }
-
 var playerX = new Player("X");
 var playerO = new Player("O");
 var newBoard = new Board();
@@ -14,7 +12,6 @@ var players = {
   "X": playerX,
   "O": playerO
 }
-
 var currentId = 0;
 var switchPlayer = function () {
   if (currentId === 1) {
@@ -75,6 +72,9 @@ Board.prototype.checkWinCondition = function () {
   return false;
 }
 
+Board.prototype.resetBoard = function() {
+  this.currentBoard =  [[], [], []];
+}
 Board.prototype.checkDrawCondition = function () {
   var j = 0;
   for (var i = 0; i < this.currentBoard.length; i++) {
@@ -83,17 +83,16 @@ Board.prototype.checkDrawCondition = function () {
     }
   }
   if (j === 3) {
-    $("#result").append("It's a draw!")
-    $(".col-md-4").empty();
-    this.resetBoard();
+    return true;
   }
-}
-Board.prototype.resetBoard = function() {
-  
-  this.currentBoard = this.initialBoard;
+  return false;
 }
 
 $(document).ready(function () {
+  // $("#resetGame").click(function() {
+  //   $(".col-md-4").empty();
+  //   var newBoard = new Board;
+  // })
   $(".col-md-4").click(function (event) {
     switchPlayer();
     switch (Object.keys(players)[currentId]) {
@@ -106,11 +105,15 @@ $(document).ready(function () {
     }
     var coordinatePair = getCoordinate(event.target.id);
     newBoard.currentBoard[coordinatePair[0]][coordinatePair[1]] = $("#" + event.target.id).text();
-    newBoard.checkDrawCondition();
-    if (newBoard.checkWinCondition()) {
-     $("#result").append("Player " + Object.keys(players)[currentId] + " won!</br>");
+    if (newBoard.checkDrawCondition()) {
+      $("#result").append("It's a draw! </br>")
       $(".col-md-4").empty();
       newBoard.resetBoard();
+    }
+    else if (newBoard.checkWinCondition()) {
+     $("#result").append("Player " + Object.keys(players)[currentId] + " won!</br>");
+     $(".col-md-4").empty();
+     newBoard.resetBoard();
     }
   })
 });
