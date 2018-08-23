@@ -72,8 +72,8 @@ Board.prototype.checkWinCondition = function () {
   return false;
 }
 
-Board.prototype.resetBoard = function() {
-  this.currentBoard =  [[], [], []];
+Board.prototype.resetBoard = function () {
+  this.currentBoard = [[], [], []];
 }
 Board.prototype.checkDrawCondition = function () {
   var j = 0;
@@ -89,7 +89,7 @@ Board.prototype.checkDrawCondition = function () {
 }
 
 $(document).ready(function () {
-  
+
   $(".col-md-4").click(function (event) {
     switchPlayer();
     switch (Object.keys(players)[currentId]) {
@@ -108,13 +108,34 @@ $(document).ready(function () {
       newBoard.resetBoard();
     }
     else if (newBoard.checkWinCondition()) {
-     $("#result").append("Player " + Object.keys(players)[currentId] + " won!</br>");
-     $(".col-md-4").empty();
-     newBoard.resetBoard();
+      $("#result").append("Player " + Object.keys(players)[currentId] + " won!</br>");
+      $(".col-md-4").empty();
+      newBoard.resetBoard();
     }
   })
 
-  $("#clearResult").click(function() {
+  $("#clearResult").click(function () {
     $("#result").empty();
   })
+  // Wrap every letter in a span
+  $('.ml16').each(function () {
+    $(this).html($(this).text().replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>"));
+  });
+
+  anime.timeline({ loop: true })
+    .add({
+      targets: '.ml16 .letter',
+      translateY: [-100, 0],
+      easing: "easeOutExpo",
+      duration: 1400,
+      delay: function (el, i) {
+        return 30 * i;
+      }
+    }).add({
+      targets: '.ml16',
+      opacity: 0,
+      duration: 1000,
+      easing: "easeOutExpo",
+      delay: 1000
+    });
 });

@@ -3,7 +3,7 @@
   height: 23vh;
   text-align: center;
   font-size: 130px;
-  border: 3px solid papayawhip;
+  border: 5px solid papayawhip;
   color: papayawhip;
 }
 .row {
@@ -14,21 +14,47 @@
    text-align: center;
    background-color: #774d69;
    color: papayawhip;
+   font-family: 'Fascinate Inline', cursive;
  }
 
 
 h1 {
-  font-family: 'Fascinate Inline', cursive;
-  font-size: 50px;
-  margin-bottom: 30px;
+  font-size: 4.5em;
+  margin-bottom: 0.6em;
+  margin-left: 7%;
 }
 
 .card {
   background-color: papayawhip;
   color:#774d69;
   text-align: center;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
 }
 
 ul {
   padding: 0;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+button {
+  border-color:papayawhip;
+  background-color: papayawhip;
+  color: #774d69;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+.ml16 {
+  color: #533939;
+  padding: 40px 0;
+  font-weight: 800;
+  font-size: 2em;
+  text-transform: uppercase;
+  letter-spacing: 0.5em;
+  overflow: hidden;
+  margin-left: 7%;
+}
+
+.ml16 .letter {
+  display: inline-block;
+  line-height: 1em;
 }
