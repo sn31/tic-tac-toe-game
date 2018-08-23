@@ -3,13 +3,16 @@ function Player(mark) {
 }
 
 function Board() {
-  this.initialBoard = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
-  this.currentBoard = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+  this.initialBoard = [[], [], []]
+  this.currentBoard = [[], [], []]
 }
 var playerX = new Player("X");
 var playerO = new Player("O");
-
 var newBoard = new Board();
+var players = {
+  "X": playerX,
+  "O": playerO
+}
 var currentId = 0;
 var switchPlayer = function () {
   if (currentId === 1) {
@@ -19,11 +22,9 @@ var switchPlayer = function () {
     currentId = 1;
   }
 }
-var players = {
-  "X": playerX,
-  "O": playerO
+var getCoordinate = function(id) {
+  return coordinatePair = [id[1],id[3]];
 }
-
 $(document).ready(function () {
   $(".col-md-4").click(function (event) {
     switchPlayer();
@@ -35,7 +36,11 @@ $(document).ready(function () {
           $("#" + event.target.id).text("O");
         break;
     }
-    console.log(event.target.id);
+    var coordinatePair = getCoordinate(event.target.id);
+    
+    newBoard.currentBoard[coordinatePair[0]][coordinatePair[1]] = $("#" + event.target.id).text();
+    console.log(newBoard.currentBoard[coordinatePair[0]][coordinatePair[1]]);
+    console.log(newBoard.currentBoard);
   })
   
 });
