@@ -12,9 +12,10 @@ Tic-tac-toe (also known as noughts and crosses or Xs and Os) is a game for two p
 
 | Specs    |  Input | Expected Output    
 | ------------- |------------- |:-------------:|
-| A player can choose their mark| Player 1 chooses X | Player 2 will have O.
+| A player can choose their mark| Player 1 chooses X | Player 2 will have O
 | When a player click a square, their symbol will appear in that square. | X-user clicked square[1,1]| Square[1,1] = X
-| One a player has played 3 marks in a row in either the horizontal, vertical or diagonal direction, they win the game|Mark|Alert winner.
+| One a player has played 3 marks in a row in either the horizontal, vertical or diagonal direction, they win the game|Mark|Alert winner
+| If the board is full and there is no winner, the game is draw. | NA | NA
 
 ## Setup/Installation Requirements
 

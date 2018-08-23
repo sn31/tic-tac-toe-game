@@ -89,10 +89,6 @@ Board.prototype.checkDrawCondition = function () {
 }
 
 $(document).ready(function () {
-  // $("#resetGame").click(function() {
-  //   $(".col-md-4").empty();
-  //   var newBoard = new Board;
-  // })
   $(".col-md-4").click(function (event) {
     switchPlayer();
     switch (Object.keys(players)[currentId]) {
