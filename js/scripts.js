@@ -22,25 +22,62 @@ var switchPlayer = function () {
     currentId = 1;
   }
 }
-var getCoordinate = function(id) {
-  return coordinatePair = [id[1],id[3]];
+
+var getCoordinate = function (id) {
+  return coordinatePair = [id[1], id[3]];
 }
+
+Board.prototype.checkWinCondition = function () {
+  // Check horizontal solutions
+  for (var i = 0; i < 3; i++) {
+    var j = 0;
+    for (j = 0; i < 3; j++) {
+      if (this.currentBoard[i][j] !== Object.keys(players)[currentId]) {
+        break;
+      }
+    }
+    if (j === 3) {
+      return true;
+    }
+  }
+  return false;
+
+  // Check vertical solutions
+  for (var i = 0; i < 3; i++) {
+    var j = 0;
+    for (j = 0; i < 3; j++) {
+      if (this.currentBoard[j][i] !== Object.keys(players)[currentId]) {
+        break;
+      }
+    }
+    if (j === 3) {
+      return true;
+    }
+  }
+  return false;
+
+  // Check for diagonal solutions
+}
+
+
+
+
 $(document).ready(function () {
   $(".col-md-4").click(function (event) {
     switchPlayer();
     switch (Object.keys(players)[currentId]) {
-      case "X": 
-          $("#" + event.target.id).text("X");
+      case "X":
+        $("#" + event.target.id).text("X");
         break;
       case "O":
-          $("#" + event.target.id).text("O");
+        $("#" + event.target.id).text("O");
         break;
     }
     var coordinatePair = getCoordinate(event.target.id);
-    
+
     newBoard.currentBoard[coordinatePair[0]][coordinatePair[1]] = $("#" + event.target.id).text();
     console.log(newBoard.currentBoard[coordinatePair[0]][coordinatePair[1]]);
     console.log(newBoard.currentBoard);
   })
-  
+
 });
