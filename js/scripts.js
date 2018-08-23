@@ -6,6 +6,7 @@ function Board() {
   this.initialBoard = [[], [], []]
   this.currentBoard = [[], [], []]
 }
+
 var playerX = new Player("X");
 var playerO = new Player("O");
 var newBoard = new Board();
@@ -13,6 +14,7 @@ var players = {
   "X": playerX,
   "O": playerO
 }
+
 var currentId = 0;
 var switchPlayer = function () {
   if (currentId === 1) {
@@ -63,7 +65,7 @@ Board.prototype.checkWinCondition = function () {
   }
 
   for (i = 0; i < 3; i++) {
-    if (this.currentBoard[2-i][i] !== Object.keys(players)[currentId]) {
+    if (this.currentBoard[2 - i][i] !== Object.keys(players)[currentId]) {
       break;
     }
   }
@@ -73,18 +75,24 @@ Board.prototype.checkWinCondition = function () {
   return false;
 }
 
-Board.prototype.checkDrawCondition = function() {
+Board.prototype.checkDrawCondition = function () {
   var j = 0;
-  for (var i = 0; i <this.currentBoard.length;i++) {
+  for (var i = 0; i < this.currentBoard.length; i++) {
     if (this.currentBoard[i].length === this.currentBoard.length) {
-      j ++; 
+      j++;
     }
   }
-  console.log(j);
   if (j === 3) {
-    alert ("It's a draw!");
+    alert("It's a draw!");
+    $(".col-md-4").empty();
+    this.resetBoard();
   }
 }
+Board.prototype.resetBoard = function() {
+  
+  this.currentBoard = this.initialBoard;
+}
+
 $(document).ready(function () {
   $(".col-md-4").click(function (event) {
     switchPlayer();
@@ -97,13 +105,14 @@ $(document).ready(function () {
         break;
     }
     var coordinatePair = getCoordinate(event.target.id);
-   
     newBoard.currentBoard[coordinatePair[0]][coordinatePair[1]] = $("#" + event.target.id).text();
     newBoard.checkDrawCondition();
     if (newBoard.checkWinCondition()) {
-      alert("Win");
+      alert("Player " + Object.keys(players)[currentId] + " is the winner!");
+      $(".col-md-4").empty();
+      newBoard.resetBoard();
     }
-    
+
   })
 
 });
