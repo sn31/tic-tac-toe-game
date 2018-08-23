@@ -40,7 +40,6 @@ Board.prototype.checkWinCondition = function () {
       return true;
     }
   }
-  return false;
 
   // Check vertical solutions
   for (var i = 0; i < 3; i++) {
@@ -54,13 +53,28 @@ Board.prototype.checkWinCondition = function () {
       return true;
     }
   }
+  
+  // Check for identical diaganol
+  var i = 0;
+  for (i = 0; i < 3; i++) {
+    if (this.currentBoard[i][i] !== Object.keys(players)[currentId]) {
+      break;
+    }
+  }
+  if (i === 3) {
+    return true;
+  }
+
+  for (i = 0; i < 3; i++) {
+    if (this.currentBoard[2-i][i] !== Object.keys(players)[currentId]) {
+      break;
+    }
+  }
+  if (i === 3) {
+    return true;
+  }
   return false;
-
-  // Check for diagonal solutions
 }
-
-
-
 
 $(document).ready(function () {
   $(".col-md-4").click(function (event) {
@@ -76,8 +90,11 @@ $(document).ready(function () {
     var coordinatePair = getCoordinate(event.target.id);
 
     newBoard.currentBoard[coordinatePair[0]][coordinatePair[1]] = $("#" + event.target.id).text();
-    console.log(newBoard.currentBoard[coordinatePair[0]][coordinatePair[1]]);
-    console.log(newBoard.currentBoard);
+     
+    if (newBoard.checkWinCondition()) {
+      alert("Win");
+    }
+    
   })
 
 });
