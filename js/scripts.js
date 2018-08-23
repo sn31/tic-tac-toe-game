@@ -22,7 +22,6 @@ var switchPlayer = function () {
     currentId = 1;
   }
 }
-
 var getCoordinate = function (id) {
   return coordinatePair = [id[1], id[3]];
 }
@@ -52,7 +51,7 @@ Board.prototype.checkWinCondition = function () {
       return true;
     }
   }
-  // Check for identical diaganol
+  // Check for identical diagonal
   var i = 0;
   for (i = 0; i < 3; i++) {
     if (this.currentBoard[i][i] !== Object.keys(players)[currentId]) {
@@ -100,8 +99,6 @@ $(document).ready(function () {
     var coordinatePair = getCoordinate(event.target.id);
    
     newBoard.currentBoard[coordinatePair[0]][coordinatePair[1]] = $("#" + event.target.id).text();
-    // console.log(newBoard.currentBoard[0].length);
-    // console.log(newBoard.currentBoard)
     newBoard.checkDrawCondition();
     if (newBoard.checkWinCondition()) {
       alert("Win");
